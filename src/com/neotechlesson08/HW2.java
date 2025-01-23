@@ -3,29 +3,21 @@ package com.neotechlesson08;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.neotech.utils.BaseClass;
 
-public class HW1 extends BaseClass{
-/*
-  		Homework 1: Use WebDriverWait Verify element is enabled
+public class HW2 extends BaseClass{
 
-		 Open chrome browser
-		 Go to "https://neotech.vercel.app/" 
-		 Click on the "Interactions" link 
-		 Then click on "Waits"
-		 Click on enable button 
-		 Enter "Hello" and verify text is entered successfully 
-		 Close the browser
-		 
- 
- */
 	public static void main(String[] args) throws InterruptedException {
-		
-		setUp(); //create the driver, decide which browser to use, maximize, go to url 
+      setUp(); 
+
+//create the driver, decide which browser to use, maximize, go to url 
 		
 		//Waits:
 			//implicit wait: I want to be patient with all elements, if an element is not there immediately
@@ -48,8 +40,17 @@ public class HW1 extends BaseClass{
 		WebElement textbox = driver.findElement(By.xpath("//form[@id='input-example']/input"));
 		
 		
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-		wait.until(ExpectedConditions.elementToBeClickable(textbox));
+		//WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		//wait.until(ExpectedConditions.elementToBeClickable(textbox));
+		
+		//Difference in HW2 use a FluentWait 
+		FluentWait<WebDriver> fluentWait = new FluentWait<WebDriver>(driver);
+		fluentWait.withTimeout(Duration.ofSeconds(20));
+		fluentWait.pollingEvery(Duration.ofSeconds(2));
+		fluentWait.until(ExpectedConditions.elementToBeClickable(textbox));
+		
+		
+		
 		
 		textbox.sendKeys("Hello");
 		

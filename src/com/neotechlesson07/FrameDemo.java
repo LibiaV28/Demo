@@ -21,7 +21,9 @@ public class FrameDemo extends BaseClass {
 		driver.switchTo().frame(0);
 		
 		WebElement age = driver.findElement(By.id("age"));
+		
 		age.sendKeys("42");
+		
 		//driver.findElement(By.id("age")).sendKeys("42"); no need to use bc we created WebElement 
 		Thread.sleep(2000);
 		
